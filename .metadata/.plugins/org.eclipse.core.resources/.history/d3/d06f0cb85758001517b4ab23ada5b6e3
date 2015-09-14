@@ -1,0 +1,77 @@
+package controlers;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.annotation.PostConstruct;
+import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
+import javax.enterprise.inject.Model;
+import javax.enterprise.inject.Produces;
+import javax.inject.Inject;
+import javax.inject.Named;
+
+import models.LoggedUser;
+import models.Score;
+import services.ScoreBean;
+import sweeper.Field;
+
+@SuppressWarnings("serial")
+@Named
+@RequestScoped
+public class ScoreControler implements Serializable {
+
+	private long startTime;
+
+	@Produces
+	@Named
+	private Score scoreNew;
+
+	@Inject
+	@Named
+	private LoggedUser loggedUser;
+
+	@Inject
+	private ScoreBean scored;
+
+	@PostConstruct
+	public void initNewRegistration() {
+		scoreNew = new Score();
+	}
+
+	public void InitializeNameTimes(String game, long startTime, long endTime) {
+		System.out.println("tu este dojdem");
+		scoreNew.setGame(game);
+		scoreNew.setName(loggedUser.getLogin());
+		System.out.println(startTime);
+		if (game.equals("Guess")) { // 
+			System.out.println("Toto su kliky"+endTime+" "); // 
+			scoreNew.setTime(endTime);	//		
+		} else {
+			scoreNew.setTime(((endTime - startTime) / 1000));
+		}
+
+		if (loggedUser.getLogin() != null) {
+			try {
+				scored.register(scoreNew);
+			} catch (Exception e) {
+				System.out.println("Nepodaril sa upload do databazy");
+			}
+		}
+	}
+
+	public long getStartTime() {
+		return startTime;
+	}
+
+	public void setStartTime(long startTime) {
+		this.startTime = startTime;
+	}
+
+	public List<Score> callScoreView(String gamesis) {
+		return scored.ScoreView(gamesis);
+	}
+
+}

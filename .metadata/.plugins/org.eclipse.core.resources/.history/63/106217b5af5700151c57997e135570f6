@@ -1,0 +1,36 @@
+package services;
+
+
+import java.io.Serializable;
+import java.util.List;
+import java.util.logging.Logger;
+
+import javax.ejb.Stateless;
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.persistence.EntityManager;
+
+import models.Comments;
+
+@Named
+@Stateless
+public class CommentsBean implements Serializable {
+
+	@Inject
+	private Logger log;
+
+	@Inject
+	private EntityManager em;
+
+	public void register(Comments coment) throws Exception {
+		em.persist(coment);
+		log.info("dojde");
+	}
+
+//	public List<Score> ScoreView(String gamesis) {
+//		List<Score> scores = em.createQuery("Select s from Score s where game =:game order by time asc", Score.class)
+//				.setParameter("game", gamesis).setMaxResults(5).getResultList();
+//		return scores;
+//	}
+}
+

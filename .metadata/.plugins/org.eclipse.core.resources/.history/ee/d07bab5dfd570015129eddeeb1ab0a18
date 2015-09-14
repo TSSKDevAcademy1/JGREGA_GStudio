@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!--
+
+    Copyright (c) 2014 Oracle and/or its affiliates. All rights reserved.
+
+    You may not modify, use, reproduce, or distribute this software except in
+    compliance with  the terms of the License at:
+    http://java.net/projects/javaeetutorial/pages/BerkeleyLicense
+
+-->
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:o="http://omnifaces.org/ui" 
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="/WEB-INF/templates/gameStudioTemplate.xhtml">
+
+	<ui:define name="stones">
+		<o:resourceInclude path="/stone" />
+
+		<div style="text-align: left">
+
+			<h:form>
+
+				<h3 style="color: red">Enter rating of the game</h3>
+				<p:outputLabel value="" for="dd" />
+				<p:autoComplete id="dd" dropdown="true"
+					value="#{rateNew.rate}"
+					completeMethod="#{autoCompleteView.completeText}" width="1.5em"/>
+				Actual Rating: (#{rateControler.callRateView('Stones')})
+				<!-- <h:panelGrid columns="1" style="color: blue; text-align:left"> -->
+					<p:commandButton action="#{rateControler.register('Stones')}" value="Comment" id="SignUp"
+						styleClass="ui-priority-primary" style="text-align:left" update="display"/>
+				<!-- </h:panelGrid> -->
+
+			</h:form>
+
+
+			<h:form>				
+				<h3>Enter your Comment</h3>
+				<p:inputTextarea rows="5" cols="30" counter="displayN"
+					maxlength="100" counterTemplate="{0} characters remaining."
+					autoResize="false" value="#{commentsNew.comment}" />					
+				<h:outputText id="displayN" />
+				
+				<h:panelGrid columns="1" style="color: blue; text-align:left">
+					<p:commandButton action="#{commentsControler.register('Stones')}" value="Comment" id="SignUp"
+						styleClass="ui-priority-primary" style="text-align:left" update="display"/>
+				</h:panelGrid>
+			</h:form>
+			
+			<h:form id="display">
+			
+				<ui:repeat value="#{commentsControler.callCommentView('Stones')}"
+					var="item">
+					<h:outputText value="#{item.name}" /> : <h:outputText
+						value="#{item.comment}" />
+					<br />
+					<p:separator />
+				</ui:repeat>
+
+			</h:form>
+
+
+		</div>
+	</ui:define>
+</ui:composition>

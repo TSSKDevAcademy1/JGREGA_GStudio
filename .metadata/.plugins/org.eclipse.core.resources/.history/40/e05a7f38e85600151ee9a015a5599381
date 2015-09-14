@@ -1,0 +1,6 @@
+package gameStudio;
+
+@Local
+public interface Scored {
+
+}

@@ -1,0 +1,71 @@
+package gameStudio;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+
+import javax.annotation.PostConstruct;
+import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.SessionScoped;
+import javax.enterprise.inject.Model;
+import javax.enterprise.inject.Produces;
+import javax.inject.Inject;
+import javax.inject.Named;
+
+import sweeper.Field;
+
+
+
+@Model
+public class ScoreControler {
+	
+	private long startTime;
+	
+	@Produces
+    @Named
+	private Score scoreNew;
+	
+	@Inject
+	@Named
+	private LoggedUser loggedUser;
+	
+	@Inject
+	private Scored scored;
+	
+	@PostConstruct
+    public void initNewRegistration() {
+        scoreNew = new Score();
+    }
+
+//	private ArrayList<Score> scoreList = new ArrayList<Score>();
+	
+	public void InitializeNameTimes(long startTimer){ //long endTime,long startTime,
+		startTime = startTimer;
+	}	
+	
+	public void InitializeNameTimes(String game,long endTime){ //long endTime,long startTime,
+		System.out.println("tu este dojdem");
+		scoreNew.setGame(game);		
+		scoreNew.setName(loggedUser.getLogin());
+		System.out.println(startTime);
+		scoreNew.setTime(((endTime - startTime)/1000));
+		
+		if(loggedUser.getLogin() != null){
+			try {
+				scored.register(scoreNew);
+			} catch (Exception e) {
+				System.out.println("Nepodaril sa upload do databazy");
+			}
+		}
+	}
+
+	public long getStartTime() {
+		return startTime;
+	}
+
+	public void setStartTime(long startTime) {
+		this.startTime = startTime;
+	}
+	
+	
+	
+}

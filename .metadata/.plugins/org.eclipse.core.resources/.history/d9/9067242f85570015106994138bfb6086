@@ -1,0 +1,15 @@
+package gameStudio;
+
+import java.util.List;
+
+import javax.ejb.Local;
+
+@Local
+public interface Scored {
+	
+	void register(Score score) throws Exception;
+	
+	List<Score> ScoreViewSweeper(String gamesis); //String game
+//	List<Score> ScoreViewPuzzle();
+//	List<Score> ScoreViewStones();
+}

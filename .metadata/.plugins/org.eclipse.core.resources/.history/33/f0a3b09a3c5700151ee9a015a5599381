@@ -1,0 +1,26 @@
+package gameStudio;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
+import javax.persistence.EntityManager;
+
+@SuppressWarnings("serial")
+@ApplicationScoped
+public class ScoreView implements Serializable {
+	
+	 @Inject
+	 private EntityManager em;
+	
+//	 private List<Score> scores = new ArrayList<>();
+	 
+	 public List<Score> ScoreView(){
+//		 scores = new ArrayList<>();
+		 List<Score> scores = em.createQuery("Select s from Score s where game =:game order by time desc",
+				 Score.class).setParameter("game", "Sweeper").setMaxResults(5).getResultList();
+		return scores;
+	 }
+
+}

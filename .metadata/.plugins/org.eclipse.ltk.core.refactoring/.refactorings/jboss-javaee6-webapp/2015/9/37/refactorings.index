@@ -1,0 +1,29 @@
+1441643260083	Rename type 'UserRegistration'
+1441656854818	Rename field 'name'
+1441661185956	Rename resource 'indexOrig.xhtml'
+1441661288406	Rename resource 'skuska.html'
+1441663326438	Delete element
+1441663417753	Extract interface 'Register'
+1441720100957	Rename resource 'sweeper.xhtml'
+1441797782920	Rename type 'ScoreService'
+1441799012872	Extract interface 'Scored'
+1441800035146	Encapsulate field 'startTime'
+1441835654160	Delete element
+1441868905818	Delete element
+1441869023684	Delete element
+1441869846045	Delete element
+1441869850522	Delete element
+1441869860310	Delete element
+1441869868252	Delete element
+1441869874052	Delete element
+1441869882548	Delete element
+1441869888176	Delete element
+1441869891083	Delete element
+1441870840362	Move compilation units
+1441871016949	Move compilation units
+1441871032273	Rename package 'Services'
+1441871225376	Delete element
+1441871254172	Rename package 'gameStudio'
+1441873623213	Delete elements
+1441880551406	Rename package 'choiceGame'
+1441910393531	Delete element

@@ -1,0 +1,10 @@
+package gameStudio;
+
+import javax.ejb.Local;
+
+@Local
+public interface Scored {
+	
+	void register(Score score) throws Exception;
+
+}

@@ -1,0 +1,8 @@
+package gameStudio;
+
+import javax.ejb.Local;
+
+@Local
+public interface Scored {
+
+}

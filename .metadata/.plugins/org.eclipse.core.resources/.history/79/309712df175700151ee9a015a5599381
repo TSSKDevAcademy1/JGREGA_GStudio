@@ -1,0 +1,25 @@
+package gameStudio;
+
+import java.io.Serializable;
+import java.util.List;
+
+import javax.annotation.ManagedBean;
+import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.SessionScoped;
+import javax.inject.Inject;
+import javax.persistence.EntityManager;
+
+@SuppressWarnings("serial")
+@ApplicationScoped
+public class ScoreView implements Serializable {
+	
+	 @Inject
+	 private EntityManager em;
+	
+	 private List<Score> scores;
+	 
+	 public ScoreView(){
+		 
+	 }
+
+}

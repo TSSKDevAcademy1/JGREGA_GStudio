@@ -1,0 +1,56 @@
+package gameStudio;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+
+import javax.annotation.PostConstruct;
+import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.SessionScoped;
+import javax.enterprise.inject.Model;
+import javax.enterprise.inject.Produces;
+import javax.inject.Inject;
+import javax.inject.Named;
+
+import sweeper.Field;
+
+
+
+@Model
+public class ScoreService {
+	
+	@Produces
+    @Named
+	private Score scoreNew;
+	
+	@Inject
+	@Named
+	private LoggedUser loggedUser;
+	
+	@PostConstruct
+    public void initNewRegistration() {
+        scoreNew = new Score();
+    }
+
+//	private ArrayList<Score> scoreList = new ArrayList<Score>();
+	
+	public void InitializeNameTimes(long startTime){ //long endTime,long startTime,
+		System.out.println("tu este dojdem");
+		scoreNew.setStartTime(startTime);
+		scoreNew.setName(loggedUser.getLogin());
+		System.out.println("Hrac: "+scoreNew.getName()+"Pociatocny cas"+scoreNew.getStartTime()+"");	
+	}
+	
+	public void InitializeNameTimes(String game,long endTime){ //long endTime,long startTime,
+		System.out.println("tu este dojdem");
+		scoreNew.setGame(game);
+		scoreNew.setEndTime(endTime);
+		System.out.println("Hra:"+scoreNew.getGame()+" ukoncena v case:"+scoreNew.getEndTime()+"");	
+		
+		if(loggedUser.getLogin() != null){
+			
+		}
+	}
+	
+	
+	
+}

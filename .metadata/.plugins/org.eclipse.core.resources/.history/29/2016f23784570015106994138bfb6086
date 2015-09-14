@@ -1,0 +1,58 @@
+package gameStudio;
+
+import java.io.Serializable;
+import java.util.List;
+import java.util.logging.Logger;
+
+import javax.ejb.Stateless;
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.persistence.EntityManager;
+
+@Named
+@Stateless
+//@WebService(name="scorePublish")
+public class ScoreBean implements Scored, Serializable {
+
+	 	@Inject
+	    private Logger log;
+
+	    @Inject
+	    private EntityManager em;
+	    
+	    public void register(Score score) throws Exception {	        
+	        em.persist(score);
+	        log.info("dojde");
+	    }	
+	    
+	   
+
+		@Named
+	    private String games;
+	
+		public List<Score> ScoreViewSweeper(){ //String game
+			 List<Score> scores = em.createQuery("Select s from Score s where game =:game order by time asc",
+					 Score.class).setParameter("game", games).setMaxResults(5).getResultList();
+			return scores;
+		 }
+		
+		public List<Score> ScoreViewStones(){ //String game
+			 List<Score> scores = em.createQuery("Select s from Score s where game =:game order by time asc",
+					 Score.class).setParameter("game", "Stones").setMaxResults(5).getResultList();
+			return scores;
+		 }
+		
+		public List<Score> ScoreViewPuzzle(){ //String game
+			 List<Score> scores = em.createQuery("Select s from Score s where game =:game order by time asc",
+					 Score.class).setParameter("game", "Puzzle").setMaxResults(5).getResultList();
+			return scores;
+		 }
+		
+		 public String getGames() {
+			return games;
+		}
+
+		public void setGames(String games) {
+			this.games = games;
+		}
+}

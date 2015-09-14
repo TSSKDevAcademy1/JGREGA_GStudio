@@ -1,0 +1,14 @@
+package gameStudio;
+
+import java.util.List;
+
+import javax.ejb.Local;
+
+@Local
+public interface Scored {
+	
+	void register(Score score) throws Exception;
+	
+	List<Score> ScoreView(String game);
+
+}

@@ -1,0 +1,45 @@
+package gameStudio;
+
+import java.io.Serializable;
+import java.util.List;
+import java.util.logging.Logger;
+
+import javax.ejb.Stateless;
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.jws.WebService;
+import javax.persistence.EntityManager;
+
+@Named
+@Stateless
+@WebService(name="scorePublish")
+public class ScoreBean implements Scored, Serializable {
+
+	 	@Inject
+	    private Logger log;
+
+	    @Inject
+	    private EntityManager em;
+	    
+	    public void register(Score score) throws Exception {	        
+	        em.persist(score);
+	        log.info("dojde");
+	    }	
+	    
+	    // Doplnene
+	    public List<Score> ScoreView(String game){
+			 List<Score> scores = em.createQuery("Select s from Score s where game =:game order by time asc",
+					 Score.class).setParameter("game", game).setMaxResults(5).getResultList();
+			return scores;
+		 }
+
+		@Override
+		public List<Score> ScoreView() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		
+
+		
+}

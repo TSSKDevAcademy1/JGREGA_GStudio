@@ -1,0 +1,33 @@
+package gameStudio;
+
+import java.util.List;
+import java.util.logging.Logger;
+
+import javax.ejb.Stateless;
+import javax.inject.Inject;
+import javax.jws.WebService;
+import javax.persistence.EntityManager;
+
+@Stateless
+@WebService(name="scorePublish")
+public class ScoreBean implements Scored {
+
+	 	@Inject
+	    private Logger log;
+
+	    @Inject
+	    private EntityManager em;
+	    
+	    public void register(Score score) throws Exception {	        
+	        em.persist(score);
+	        log.info("dojde");
+	    }	
+	    
+	    // Doplnene
+	    public List<Score> ScoreView(){
+//			 scores = new ArrayList<>();
+			 List<Score> scores = em.createQuery("Select s from Score s where game =:game order by time desc",
+					 Score.class).setParameter("game", "Sweeper").setMaxResults(5).getResultList();
+			return scores;
+		 }
+}
